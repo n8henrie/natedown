@@ -72,7 +72,7 @@ def process_user(uid):
     '''Call /delta for the given user ID and process any changes.'''
 
     # OAuth token for the user
-    token = redis_client.hget('tokens', uid)
+    token = redis_client.hget('tokens', uid).decode()
 
     # /delta cursor for the user (None the first time)
     cursor = redis_client.hget('cursors', uid)
@@ -93,7 +93,7 @@ def process_user(uid):
 
             # Convert to Markdown and store as <basename>.html
             response, metadata = client.get_file_and_metadata(path)
-            md = response.read()
+            md = response.read().decode()
             html = markdown(md, extensions=['gfm'])
             html_name = path[:-3] + '.html'
             client.put_file(html_name, html, overwrite=True)
