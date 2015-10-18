@@ -10,7 +10,6 @@ from flask import abort, Flask, redirect, render_template, request, session,\
                   url_for
 from markdown import markdown
 import redis
-import gfm
 
 redis_url = os.environ['REDISTOGO_URL']
 redis_client = redis.from_url(redis_url)
@@ -95,7 +94,7 @@ def process_user(uid):
             # Convert to Markdown and store as <basename>.html
             response, metadata = client.get_file_and_metadata(path)
             md = response.read()
-            html = markdown(md, ['gfm'])
+            html = markdown(md, extensions=['mdx_gfm'])
             html_name = path[:-3] + '.html'
             client.put_file(html_name, html, overwrite=True)
 
