@@ -12,7 +12,7 @@ from markdown import markdown
 import redis
 
 redis_url = os.environ['REDISTOGO_URL']
-redis_client = redis.from_url(redis_url)
+redis_client = redis.from_url(redis_url, decode_responses=True)
 
 # App key and secret from the App console (dropbox.com/developers/apps)
 APP_KEY = os.environ['APP_KEY']
@@ -72,10 +72,10 @@ def process_user(uid):
     '''Call /delta for the given user ID and process any changes.'''
 
     # OAuth token for the user
-    token = redis_client.hget('tokens', uid).decode()
+    token = redis_client.hget('tokens', uid)
 
     # /delta cursor for the user (None the first time)
-    cursor = redis_client.hget('cursors', uid).decode()
+    cursor = redis_client.hget('cursors', uid)
 
     client = DropboxClient(token)
     has_more = True
