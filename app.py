@@ -3,13 +3,14 @@ import hmac
 import json
 import os
 import threading
-import urlparse
+import urllib.parse
 
 from dropbox.client import DropboxClient, DropboxOAuth2Flow
 from flask import abort, Flask, redirect, render_template, request, session,\
                   url_for
 from markdown import markdown
 import redis
+import gfm
 
 redis_url = os.environ['REDISTOGO_URL']
 redis_client = redis.from_url(redis_url)
@@ -27,7 +28,7 @@ app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 def get_url(route):
     '''Generate a proper URL, forcing HTTPS if not running locally'''
-    host = urlparse.urlparse(request.url).hostname
+    host = urllib.parse.urlparse(request.url).hostname
     url = url_for(
         route,
         _external=True,
@@ -94,7 +95,7 @@ def process_user(uid):
             # Convert to Markdown and store as <basename>.html
             response, metadata = client.get_file_and_metadata(path)
             md = response.read()
-            html = markdown(md)
+            html = markdown(md, ['gfm'])
             html_name = path[:-3] + '.html'
             client.put_file(html_name, html, overwrite=True)
 

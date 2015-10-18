@@ -1,5 +1,5 @@
-dropbox==2.0.0
+dropbox==3.37
 Flask==0.10.1
-gunicorn==18.0
-Markdown==2.4
-redis==2.9.1
+gunicorn==19.3.0
+py-gfm==0.1.1
+redis==2.10.3
