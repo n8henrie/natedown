@@ -75,7 +75,7 @@ def process_user(uid):
     token = redis_client.hget('tokens', uid).decode()
 
     # /delta cursor for the user (None the first time)
-    cursor = redis_client.hget('cursors', uid)
+    cursor = redis_client.hget('cursors', uid).decode()
 
     client = DropboxClient(token)
     has_more = True
