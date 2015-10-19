@@ -19,7 +19,7 @@ APP_KEY = os.environ['APP_KEY']
 APP_SECRET = os.environ['APP_SECRET']
 
 app = Flask(__name__)
-app.debug = True
+app.debug = False
 
 # A random secret used by Flask to encrypt session data cookies
 app.secret_key = os.environ['FLASK_SECRET_KEY']
@@ -138,7 +138,8 @@ def validate_request():
        (If not, this is a spoofed webhook.)'''
 
     signature = request.headers.get('X-Dropbox-Signature')
-    return signature == hmac.new(APP_SECRET, request.data, sha256).hexdigest()
+    return signature == hmac.new(APP_SECRET.encode(), request.data,
+                                 sha256).hexdigest()
 
 
 @app.route('/webhook', methods=['GET'])
@@ -164,6 +165,7 @@ def webhook():
         # in a worker process.
         threading.Thread(target=process_user, args=(uid,)).start()
     return ''
+
 
 if __name__ == '__main__':
     app.run(debug=True)
