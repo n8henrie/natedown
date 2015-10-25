@@ -11,6 +11,10 @@ from flask import abort, Flask, redirect, render_template, request, session,\
 from markdown import markdown
 import redis
 
+app = Flask(__name__, instance_relative_config=True)
+app.debug = False
+app.config.from_pyfile('dev_config.py', silent=True)
+
 redis_url = os.environ['REDISTOGO_URL']
 redis_client = redis.from_url(redis_url, decode_responses=True)
 
@@ -18,12 +22,8 @@ redis_client = redis.from_url(redis_url, decode_responses=True)
 APP_KEY = os.environ['APP_KEY']
 APP_SECRET = os.environ['APP_SECRET']
 
-app = Flask(__name__)
-app.debug = False
-
 # A random secret used by Flask to encrypt session data cookies
 app.secret_key = os.environ['FLASK_SECRET_KEY']
-
 
 def get_url(route):
     '''Generate a proper URL, forcing HTTPS if not running locally'''
@@ -158,7 +158,7 @@ def webhook():
     if not validate_request():
         abort(403)
 
-    for uid in json.loads(request.data)['delta']['users']:
+    for uid in request.json['delta']['users']:
         # We need to respond quickly to the webhook request, so we do the
         # actual work in a separate thread. For more robustness, it's a
         # good idea to add the work to a reliable queue and process the queue
@@ -168,4 +168,4 @@ def webhook():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
