@@ -1,6 +1,5 @@
 from hashlib import sha256
 import hmac
-import json
 import os
 import threading
 import urllib.parse
@@ -25,15 +24,13 @@ APP_SECRET = os.environ['APP_SECRET']
 # A random secret used by Flask to encrypt session data cookies
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
+
 def get_url(route):
     '''Generate a proper URL, forcing HTTPS if not running locally'''
     host = urllib.parse.urlparse(request.url).hostname
-    url = url_for(
-        route,
-        _external=True,
-        _scheme='http' if host in ('127.0.0.1', 'localhost') else 'https'
-    )
-
+    url = url_for(route, _external=True,
+                  _scheme=('http' if host in ('127.0.0.1', 'localhost')
+                           else 'https'))
     return url
 
 
