@@ -1,3 +1,3 @@
 [submodule "dropbox_hook"]
 	path = dropbox_hook
-	url = git@github.com:dropbox/dropbox_hook.git
+	url = https://github.com/dropbox/dropbox_hook.git
