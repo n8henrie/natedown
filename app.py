@@ -101,9 +101,10 @@ def process_user(uid):
                 share_url = client.share(html_name, short_url=False).get('url')
                 file_key = share_url.split('/')[4]
 
+                url_name = urllib.parse.quote(html_name)
                 url_comment = ('<!-- Published file url:\n'
                                'https://dl.dropboxusercontent.com/s/'
-                               '{}{}\n-->\n'.format(file_key, html_name))
+                               '{}{}\n-->\n'.format(file_key, url_name))
                 md = url_comment + md
                 client.put_file(path, md, overwrite=True)
 
