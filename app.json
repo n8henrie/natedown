@@ -1,13 +1,12 @@
 {
   "name": "MarkdownBox",
   "logo": "https://mdwebhook.herokuapp.com/static/dropbox-logo.png",
-  "repository": "https://github.com/dropbox/mdwebhook",
+  "repository": "https://github.com/n8henrie/markdownbox",
   "website": "https://www.dropbox.com/developers/webhooks/tutorial",
   "keywords": ["dropbox", "python", "flask"],
   "success_url": "/welcome",
   "addons": [
-    "redistogo",
-    "papertrail"
+    "redistogo"
   ],
   "env": {
     "APP_KEY": {
