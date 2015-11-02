@@ -1,8 +1,8 @@
 {
   "name": "NateDown",
-  "logo": "https://mdwebhook.herokuapp.com/static/dropbox-logo.png",
+  "logo": "https://natedown.herokuapp.com/static/dropbox-logo.png",
   "repository": "https://github.com/n8henrie/natedown",
-  "website": "https://www.dropbox.com/developers/webhooks/tutorial",
+  "website": "http://n8henrie.com/2015/11/automatically-publish-markdown-with-a-dropbox-webhook-and-heroku",
   "keywords": ["dropbox", "python", "flask"],
   "success_url": "/welcome",
   "addons": [
