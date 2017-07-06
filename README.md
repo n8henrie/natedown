@@ -6,7 +6,7 @@ This simple  app uses webhooks to get notified of new Markdown files in Dropbox.
 
 Read more about webhooks and this example on [the Dropbox developers site](https://www.dropbox.com/developers/webhooks/tutorial).
 
-You can try the example yourself by visiting [natedown.herokuapp.com](https://natedown.herokuapp.com), or the Python2 version by checking out [the original mdwebhook](https://github.com/dropbox/mdwebhook).
+You can try the example yourself by visiting [natedown.herokuapp.com](https://natedown.herokuapp.com), or the Python2 version by checking out [the original mdwebhook](https://github.com/dropbox/mdwebhook). Note that this is only intended for seeing how the application works due to Dropbox providing a limited number of users for testing -- you may get kicked off / access to NateDown revoked at any time to make room for other users, so if you like how it works, follow the instructions to make your own version.
 
 ## Running the sample yourself
 
