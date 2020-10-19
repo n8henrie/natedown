@@ -1,5 +1,5 @@
 dropbox==8.0.0
-Flask==0.10.1
+Flask==1.0
 gunicorn==19.3.0
 py-gfm==0.1.1
 redis==2.10.3
